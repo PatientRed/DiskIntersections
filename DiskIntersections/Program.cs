@@ -9,6 +9,8 @@
 
         Console.WriteLine(new Solution().solution(A));
 
+        Console.WriteLine($"Googled: {DiscIntersectionsGoogleEdition(A)}");
+
         Console.ReadKey();
     }
 
@@ -32,9 +34,50 @@
         return count;
     }
 
+    //O(N) time, O(N) mem
     public static int DiscIntersectionsGoogleEdition(int[] input)
     {
-        return 0;
+        //https://stackoverflow.com/a/16814894
+
+        int result = 0;
+        //2*O(N) Mem
+        int[] startsAt = new int[input.Length];
+        int[] endsAt = new int[input.Length];
+
+        //O(N)
+        for (int i = 0, j = input.Length - 1; i < input.Length; i++)
+        {
+            int left = i > input[i] ? i - input[i] : 0;
+            int right = j - i > input[i] ? i + input[i] : j;
+
+            startsAt[left]++;
+            endsAt[right]++;
+        }
+
+        for (int i = 0, current = 0; i < input.Length; i++)
+        {
+            if (startsAt[i] > 0)
+            {
+                //new starts intersects all of currently continuos circles
+                result += current * startsAt[i];
+                //intersections of new starts.
+                //C(n, k), we need pairs, so k = 2.
+                //C(startsAt[i], 2) = startsAt[i]! / (2! * (startsAt[i]-2)!).
+                //See https://en.wikipedia.org/wiki/Combination#Number_of_k-combinations
+                result += startsAt[i] * (startsAt[i] - 1) / 2;
+
+                if (result > _limit)
+                    return -1;
+
+                //add new starts into active disks pool
+                current += startsAt[i];
+            }
+
+            //remove finished at this point
+            current -= endsAt[i];
+        }
+
+        return result;
     }
 
     //O(2*radius-1) === [O(1), O(N)]
