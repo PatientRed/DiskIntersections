@@ -52,3 +52,8 @@
         return total;
     }
 }
+
+internal class Solution
+{
+    public int solution(int[] A) => Program.DiscIntersections(A);
+}
