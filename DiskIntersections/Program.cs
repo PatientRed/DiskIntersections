@@ -45,15 +45,16 @@
         int[] endsAt = new int[input.Length];
 
         //O(N)
-        for (int i = 0, j = input.Length - 1; i < input.Length; i++)
+        for (int i = 0, maxRight = input.Length - 1; i < input.Length; i++)
         {
-            int left = i > input[i] ? i - input[i] : 0;
-            int right = j - i > input[i] ? i + input[i] : j;
+            int left = i > input[i] ? i - input[i] : 0; //0 is maxLeft
+            int right = maxRight - i > input[i] ? i + input[i] : maxRight;
 
             startsAt[left]++;
             endsAt[right]++;
         }
 
+        //O(N)
         for (int i = 0, current = 0; i < input.Length; i++)
         {
             if (startsAt[i] > 0)
