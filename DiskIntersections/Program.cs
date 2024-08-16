@@ -6,11 +6,11 @@
 
     public static int DiscIntersections(int[] input)
     {
-        //can be packed into (input.Length**2)/2 bits structure if you need to consume less memory
+        //can be packed into (input.Length**2)/2 bits structure if you need to consume less memory (now consumes (input.Length^2)*8 B)
         bool[,] cache = new bool[input.Length, input.Length];
         int count = 0;
 
-        //O(N*(2radius-1)) === best O(N) to worst O(N^2)
+        //O(N*(2radius-1)) === best O(N) to worst O(N^2) (though one N is assignments when the second N consists fully of bool checks (aka lowcoster))
         for (int i = 0; i < input.Length; i++)
             count += UpdateIntersections(cache, i, input[i]);
 
