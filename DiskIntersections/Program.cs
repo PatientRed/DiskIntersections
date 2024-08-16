@@ -2,6 +2,12 @@
 {
     private static void Main(string[] args)
     {
+        //11
+        int[] A = [1, 5, 2, 1, 4, 0];
+
+        Console.WriteLine(new Solution().solution(A));
+
+        Console.ReadKey();
     }
 
     public static int DiscIntersections(int[] input)
