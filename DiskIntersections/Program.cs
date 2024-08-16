@@ -12,6 +12,8 @@
         Console.ReadKey();
     }
 
+    //O(N) to O(N^2) time, potential O(N^2/2) memory, currently O(N^2) mem
+    //O(N*M) where M = avg(radius) [= input.Average()]?
     public static int DiscIntersections(int[] input)
     {
         //can be packed into (input.Length**2)/2 bits structure if you need to consume less memory (now consumes (input.Length^2)*8 B)
