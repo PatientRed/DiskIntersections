@@ -10,6 +10,10 @@
         bool[,] cache = new bool[input.Length, input.Length];
         int count = 0;
 
+        //O(N*(2radius-1)) === best O(N) to worst O(N^2)
+        for (int i = 0; i < input.Length; i++)
+            count += UpdateIntersections(cache, i, input[i]);
+
         return count;
     }
 
