@@ -1,5 +1,7 @@
 ﻿internal class Program
 {
+    const int _limit = 10_000_000;
+
     private static void Main(string[] args)
     {
         //11
@@ -18,7 +20,12 @@
 
         //O(N*(2radius-1)) === best O(N) to worst O(N^2) (though one N is assignments when the second N consists fully of bool checks (aka lowcoster))
         for (int i = 0; i < input.Length; i++)
+        {
             count += UpdateIntersections(cache, i, input[i]);
+
+            if (count > _limit)
+                return -1;
+        }
 
         return count;
     }
